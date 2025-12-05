@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 import '../onboarding/onboarding_screen.dart';
-import '../dashboard/dashboard_screen.dart';
+import 'role_based_home_screen.dart';
 import 'login_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -38,9 +38,9 @@ class AuthWrapper extends StatelessWidget {
                 );
               }
 
-              // If user profile exists, go to dashboard
+              // If user profile exists, go to role-based home
               if (profileSnapshot.hasData && profileSnapshot.data != null) {
-                return const DashboardScreen();
+                return const RoleBasedHomeScreen();
               }
 
               // If no profile, go to onboarding
