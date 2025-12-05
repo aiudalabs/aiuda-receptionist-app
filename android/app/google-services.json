@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "36621639382",
+    "project_id": "aiuda-receptionist",
+    "storage_bucket": "aiuda-receptionist.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36621639382:android:8aa604234b02eb018b7377",
+        "android_client_info": {
+          "package_name": "com.aiudalabs.aiuda_receptionist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36621639382-lcum08s3lcupd2p7rs26mjferjc7v05n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYXDkmNHsoaiF4nRyD0JKQtgzJe5y1RrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36621639382-lcum08s3lcupd2p7rs26mjferjc7v05n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36621639382-7tsc0jra5h99f34enplu7ggqrlb77qhb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aiudalabs.aiudaReceptionist"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36621639382:android:ef96e950cb5706468b7377",
+        "android_client_info": {
+          "package_name": "com.example.aiuda_receptionist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36621639382-lcum08s3lcupd2p7rs26mjferjc7v05n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYXDkmNHsoaiF4nRyD0JKQtgzJe5y1RrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36621639382-lcum08s3lcupd2p7rs26mjferjc7v05n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "36621639382-7tsc0jra5h99f34enplu7ggqrlb77qhb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aiudalabs.aiudaReceptionist"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
