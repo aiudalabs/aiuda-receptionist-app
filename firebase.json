@@ -1,1 +1,36 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"aiuda-receptionist","appId":"1:36621639382:android:8aa604234b02eb018b7377","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"aiuda-receptionist","configurations":{"android":"1:36621639382:android:8aa604234b02eb018b7377"}}}}}}
+{
+    "functions": [
+        {
+            "source": "backend/functions",
+            "codebase": "default",
+            "ignore": [
+                "node_modules",
+                ".git",
+                "firebase-debug.log",
+                "firebase-debug.*.log"
+            ],
+            "predeploy": [
+                "npm --prefix \"$RESOURCE_DIR\" run build"
+            ]
+        }
+    ],
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "aiuda-receptionist",
+                    "appId": "1:36621639382:android:8aa604234b02eb018b7377",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "aiuda-receptionist",
+                    "configurations": {
+                        "android": "1:36621639382:android:8aa604234b02eb018b7377"
+                    }
+                }
+            }
+        }
+    }
+}

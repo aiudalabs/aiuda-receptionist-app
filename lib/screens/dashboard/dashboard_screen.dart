@@ -10,6 +10,7 @@ import '../business/my_businesses_screen.dart';
 import '../invitations/invitations_screen.dart';
 import '../appointments/provider_appointments_screen.dart';
 import '../appointments/appointment_detail_screen.dart';
+import '../chat/ai_chat_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -206,6 +207,20 @@ class DashboardScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AIChatScreen(),
+            ),
+          );
+        },
+        label: const Text('Ask Aiuda'),
+        icon: const Icon(Icons.chat_bubble_outline),
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
       ),
     );
   }

@@ -8,8 +8,10 @@ import 'search_results_screen.dart';
 import 'provider_public_profile_screen.dart';
 import 'business_public_profile_screen.dart';
 
+import '../chat/ai_chat_screen.dart';
+
 class ClientHomeScreen extends StatefulWidget {
-  const ClientHomeScreen({super.key});
+  const ClientHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<ClientHomeScreen> createState() => _ClientHomeScreenState();
@@ -92,6 +94,17 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
             },
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AIChatScreen()),
+          );
+        },
+        label: const Text('Ask Aiuda'),
+        icon: const Icon(Icons.chat_bubble_outline),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: RefreshIndicator(
         onRefresh: _loadFeatured,
