@@ -1,4 +1,4 @@
-package com.example.aiuda_receptionist
+package com.aiudalabs.aiuda_receptionist
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -54,9 +54,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCYXDkmNHsoaiF4nRyD0JKQtgzJe5y1RrY',
-    appId: '1:36621639382:android:ef96e950cb5706468b7377',
+    appId: '1:36621639382:android:8aa604234b02eb018b7377',
     messagingSenderId: '36621639382',
     projectId: 'aiuda-receptionist',
     storageBucket: 'aiuda-receptionist.firebasestorage.app',
   );
+
 }

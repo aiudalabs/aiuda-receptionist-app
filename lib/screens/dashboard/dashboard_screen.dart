@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
+import '../../services/invitation_service.dart';
+import '../services/services_management_screen.dart';
+import '../profile/profile_screen.dart';
+import '../availability/multi_location_availability_screen.dart';
+import '../business/my_businesses_screen.dart';
+import '../invitations/invitations_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -14,6 +20,49 @@ class DashboardScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
         actions: [
+          // Notifications bell
+          FutureBuilder<int>(
+            future:
+                InvitationService().getPendingInvitationCount(user?.uid ?? ''),
+            builder: (context, snapshot) {
+              final count = snapshot.data ?? 0;
+              return Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InvitationsScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  if (count > 0)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          count > 9 ? '9+' : count.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
@@ -50,16 +99,20 @@ class DashboardScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           userProfile?.businessName ?? 'Your Business',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           userProfile?.email ?? '',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.grey[600],
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.grey[600],
+                                  ),
                         ),
                       ],
                     ),
@@ -89,9 +142,10 @@ class DashboardScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             'No appointments today',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: Colors.grey[600],
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Colors.grey[600],
+                                    ),
                           ),
                         ],
                       ),
@@ -116,28 +170,58 @@ class DashboardScreen extends StatelessWidget {
                   crossAxisSpacing: 12,
                   children: [
                     _QuickActionCard(
-                      icon: Icons.chat_outlined,
-                      title: 'Chat',
-                      subtitle: 'Coming soon',
-                      onTap: () {},
+                      icon: Icons.work_outline,
+                      title: 'My Services',
+                      subtitle: 'Manage services',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const ServicesManagementScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _QuickActionCard(
-                      icon: Icons.settings_outlined,
-                      title: 'Settings',
-                      subtitle: 'Coming soon',
-                      onTap: () {},
+                      icon: Icons.person_outline,
+                      title: 'My Profile',
+                      subtitle: 'Edit your info',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProfileScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _QuickActionCard(
                       icon: Icons.calendar_month_outlined,
-                      title: 'Calendar',
-                      subtitle: 'Coming soon',
-                      onTap: () {},
+                      title: 'Availability',
+                      subtitle: 'Manage schedule',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const MultiLocationAvailabilityScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _QuickActionCard(
-                      icon: Icons.people_outlined,
-                      title: 'Clients',
-                      subtitle: 'Coming soon',
-                      onTap: () {},
+                      icon: Icons.storefront_outlined,
+                      title: 'My Businesses',
+                      subtitle: 'Manage locations',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyBusinessesScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -174,7 +258,8 @@ class _QuickActionCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
+              Icon(icon,
+                  size: 32, color: Theme.of(context).colorScheme.primary),
               const SizedBox(height: 8),
               Text(
                 title,

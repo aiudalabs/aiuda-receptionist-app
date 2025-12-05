@@ -45,5 +45,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Camera/Photo permissions for image_picker -->
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to take profile and portfolio photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to select profile and portfolio photos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs microphone access for video recording.</string>
 </dict>
 </plist>

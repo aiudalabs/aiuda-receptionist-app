@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 import 'signup_screen.dart';
+import 'phone_input_screen.dart';
+import '../onboarding/onboarding_screen.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -50,6 +53,66 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() => _isLoading = false);
       }
     }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final authService = Provider.of<AuthService>(context, listen: false);
+      final result = await authService.signInWithGoogle(
+        onError: (error) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error),
+                backgroundColor: Colors.red[600],
+              ),
+            );
+          }
+        },
+      );
+
+      if (result != null && mounted) {
+        // Check if user profile exists
+        final userProfile = await authService.getUserProfile(result.user!.uid);
+
+        if (!mounted) return;
+
+        if (userProfile == null) {
+          // New user, go to onboarding
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const OnboardingScreen(),
+            ),
+          );
+        }
+        // Existing user navigation handled by AuthWrapper
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red[600],
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  void _handlePhoneLogin() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PhoneInputScreen(),
+      ),
+    );
   }
 
   @override
@@ -169,6 +232,59 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: const Text('Sign Up'),
                       ),
                     ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Divider with "OR"
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'OR',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Google Sign-In button
+                  OutlinedButton.icon(
+                    onPressed: _isLoading ? null : _handleGoogleSignIn,
+                    icon: _isLoading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.g_mobiledata, size: 32),
+                    label: const Text('Continue with Google'),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      side: BorderSide(color: Colors.grey[300]!),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // SMS Sign-In button
+                  OutlinedButton.icon(
+                    onPressed: _isLoading ? null : _handlePhoneLogin,
+                    icon: const Icon(Icons.sms_outlined),
+                    label: const Text('Continue with SMS'),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      side: BorderSide(color: Colors.grey[300]!),
+                    ),
                   ),
                 ],
               ),
